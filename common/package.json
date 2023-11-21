@@ -1,0 +1,12 @@
+{
+  "name": "animila-common-core",
+  "version": "1.0.7",
+  "description": "Общий модуль всех инструментов для работы",
+  "main": "./src",
+  "scripts": {
+    "pub": "npm version patch && npm publish --access"
+  },
+  "author": "hristoforovila5@gmail.com",
+  "keywords": [],
+  "license": "MIT"
+}

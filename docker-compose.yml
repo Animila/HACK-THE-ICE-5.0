@@ -1,0 +1,61 @@
+version: '3.2'
+
+services:
+  gateway:
+    container_name: gateway
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - auth_api
+    networks:
+      - auth-network
+
+  auth_db:
+    image: postgres:alpine3.18
+    volumes:
+      - ./database/users:/var/lib/postgresql/data
+    container_name: auth_db
+    environment:
+      - POSTGRES_USER=${USER_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${USER_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${USER_POSTGRES_DB}
+    ports:
+      - '5432:5432'
+    expose:
+      - 5432
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}' ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: always
+    networks:
+      - auth-network
+
+  auth_api:
+    container_name: auth_api
+    build:
+      context: Api.Auth
+      dockerfile: Dockerfile
+    volumes:
+      - ./Api.Auth:/app
+      -  /app/node_modules
+    depends_on:
+      - auth_db
+    ports:
+      - "4000:4000"
+    networks:
+      - auth-network
+    expose:
+      - 4000
+
+
+networks:
+  auth-network:
+    driver: bridge
