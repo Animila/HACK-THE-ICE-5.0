@@ -6,7 +6,7 @@ generator client {
   output   = "./models"
 }
 
-datasource db {
+datasource models {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }

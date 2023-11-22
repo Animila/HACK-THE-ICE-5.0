@@ -1,3 +1,5 @@
+import {verify} from "crypto";
+
 const jwt = require('jsonwebtoken')
 import {PrismaClient} from '@prisma/client'
 
@@ -12,10 +14,34 @@ class TokenService {
             refreshToken
         }
     }
+
+    validateAccessToken(token: string) {
+        try {
+            const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET)
+            return userData
+        } catch (e) {
+            return null
+        }
+    }
+    validateRefreshToken(token: string) {
+        try {
+            const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET)
+            return userData
+        } catch (e) {
+            return null
+        }
+    }
+
     async saveToken(userId: number, refreshToken: string) {
-        const searchToken = await prisma.Token.findUnique
+        const searchToken = await prisma.token.findUnique({
+            where: {
+                userId: userId
+            }
+        });
+
         if(searchToken) {
-            const result = await prisma.Token.update({
+            console.log(refreshToken)
+            const result = await prisma.token.update({
                 where: {
                     userId: userId
                 },
@@ -25,7 +51,7 @@ class TokenService {
             });
             return searchToken
         }
-        const createdToken = await prisma.Token.create({
+        const createdToken = await prisma.token.create({
             data: {
                 userId: userId,
                 refreshToken: refreshToken
@@ -33,6 +59,26 @@ class TokenService {
         });
 
         return createdToken;
+    }
+
+    async removeToken(refreshToken: string) {
+        const tokenData = await prisma.token.delete({
+        // @ts-ignore
+            where: {
+                refreshToken: refreshToken
+            }
+        });
+        return tokenData
+    }
+
+    async findToken(refreshToken: string) {
+        const tokenData = await prisma.token.findUnique({
+            // @ts-ignore
+            where: {
+                refreshToken: refreshToken
+            }
+        });
+        return tokenData
     }
 }
 

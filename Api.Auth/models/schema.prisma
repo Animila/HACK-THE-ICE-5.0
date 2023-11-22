@@ -5,7 +5,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
+datasource models {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
@@ -22,8 +22,8 @@ model User {
 model Token {
   id           Int    @id @default(autoincrement())
   user         User   @relation(fields: [userId], references: [id])
-  userId       Int
-  refreshToken String
+  userId       Int    @unique
+  refreshToken String @unique
 }
 
 model SocialAccount {
