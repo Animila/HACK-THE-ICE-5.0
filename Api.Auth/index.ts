@@ -20,9 +20,9 @@ fastify.register(swagger, {
     routePrefix: '/auth',
     swagger: {
         info: {
-            title: "Модуль Api.Auth",
+            title: "Сервис работы с пользовательскими данными",
             version: '0.1.0',
-            description: 'Для проверки работоспособности базы данных',
+            description: 'Сервис обеспечивает систему авторизации, регистрации, аутендификации. Также здесь хранится информация касающаяся пользователя, такие как аллергии, социальные сети',
         },
         externalDocs: {
             url: 'https://hackaton-yakse.ru/auth',
