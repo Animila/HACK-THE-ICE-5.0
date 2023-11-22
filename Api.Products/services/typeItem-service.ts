@@ -6,52 +6,53 @@ const prisma = new PrismaClient();
 // @ts-ignore
 const ApiError = require('../utils/api-error')
 
-class CategoriesService {
+class TypeItemService {
     async getAll() {
-        const data = await prisma.category.findMany({});
+        const data = await prisma.subCategory.findMany({});
         return data || []
     }
     async getById(id: number) {
-        return prisma.category.findUnique({
+        return prisma.subCategory.findUnique({
             where: { id },
         });
     }
 
-    async create(title: string, path_logo: string) {
+    async create(title: string, path_logo: string, default_day: string) {
 
-        const old = await prisma.category.findFirst({where: {title: title}})
+        const old = await prisma.subCategory.findFirst({where: {title: title}})
         if(old) {
             throw ApiError.IsNotEmpty()
         }
 
-        return prisma.category.create({
+        return prisma.subCategory.create({
             data: {
                 title,
+                default_day,
                 path_logo,
             },
         });
     }
 
-    async update(id: number, newData: {title: string, path_logo: string}) {
-        const old = await prisma.category.findFirst({where: {id}})
+    async update(id: number, newData: {title: string, path_logo: string, default_day: string}) {
+        const old = await prisma.subCategory.findFirst({where: {id}})
         if(!old) {
             throw ApiError.NotFound()
         }
-        return prisma.category.update({
+        return prisma.subCategory.update({
             where: { id },
             data: newData,
         });
     }
 
     async delete(id: number) {
-        const old = await prisma.category.findFirst({where: {id}})
+        const old = await prisma.subCategory.findFirst({where: {id}})
         if(!old) {
             throw ApiError.NotFound()
         }
-        return prisma.category.delete({
+        return prisma.subCategory.delete({
             where: { id },
         });
     }
 }
 
-module.exports = new CategoriesService()
+module.exports = new TypeItemService()

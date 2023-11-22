@@ -31,6 +31,7 @@ fastify.register(swagger, {
 });
 //
 fastify.register(require('./routers/categories'), { prefix: '/products/api/categories' });
+fastify.register(require('./routers/typeItem'), { prefix: '/products/api/typeItem' });
 
 
 const start = async () => {
