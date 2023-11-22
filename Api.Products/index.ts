@@ -7,7 +7,7 @@ const router = require('./router')
 const app = express();
 const server = require('http').createServer(app)
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 const corsOptions = {
     credentials: true,
     origin: [
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
 app.use(cors(corsOptions))
 
-app.use("/auth/api", router);
+// app.use("/products/api", router);
 
 const start = async () => {
     try {
