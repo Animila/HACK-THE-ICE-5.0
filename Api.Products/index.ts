@@ -1,37 +1,46 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const express = require('express');
-const cors = require('cors')
-const cookieParser = require('cookie-parser');
-const router = require('./router')
-const app = express();
-const server = require('http').createServer(app)
+const Fastify = require('fastify')
+const cors = require('fastify-cors')
+const swagger = require('fastify-swagger')
+const fastify = Fastify()
 
 const PORT = process.env.PORT || 3000;
-const corsOptions = {
+
+fastify.register(cors, {
     credentials: true,
     origin: [
         "https://hackaton-yakse.ru",
         "https://www.hackaton-yakse.ru",
     ],
-}
+});
 
+fastify.register(swagger, {
+    exposeRoute: true,
+    routePrefix: '/products',
+    swagger: {
+        info: {
+            title: "Сервис работы с ресурсами",
+            version: '0.1.0',
+            description: 'В данной сервисе хранится информация о всех категориях, о всех типов товаров, о всех списком и предметов, а также другая информация, относящаяся к основной бизнес-логике',
+        },
+        externalDocs: {
+            url: 'https://hackaton-yakse.ru/products',
+        },
+    },
+});
+//
+fastify.register(require('./routers/categories'), { prefix: '/products/api/categories' });
 
-app.use(express.json({ extended: true }))
-app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser());
-app.use(cors(corsOptions))
-
-// app.use("/products/api", router);
 
 const start = async () => {
     try {
-        server.listen(PORT, () => {
-            console.log(`Server started on PORT = ${PORT}`)
-        })
-    } catch (e) {
-        console.log(e);
+        await fastify.listen({port: PORT, host: '0.0.0.0'});
+        console.log(`Server started on ${PORT}`);
+    } catch (err) {
+        fastify.log.error(err)
+        process.exit(1);
     }
-}
+};
 
 start();

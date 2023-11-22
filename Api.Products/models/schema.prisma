@@ -5,7 +5,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
+datasource models {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
@@ -45,6 +45,15 @@ model Item {
   list          List          @relation(fields: [listId], references: [id])
   listId        Int
   itemAllergy   ItemAllergy[]
+  changeItem    ChangeItem[]
+}
+
+model ChangeItem {
+  id     Int      @id @default(autoincrement())
+  item   Item     @relation(fields: [itemId], references: [id])
+  itemId Int
+  count  Int
+  date   DateTime
 }
 
 model List {

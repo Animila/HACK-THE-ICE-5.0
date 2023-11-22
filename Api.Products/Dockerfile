@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN npx prisma generate --schema=models/schema.prisma
+
 EXPOSE 3000
 
 
