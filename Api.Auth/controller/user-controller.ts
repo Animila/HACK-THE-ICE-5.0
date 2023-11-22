@@ -1,16 +1,20 @@
 import { Request, Response, NextFunction } from "express";
-
+const userService = require('../service/user-service')
 
 class UserController {
     async registration(req: Request, res: Response, next: NextFunction) {
         try {
-
+            const {email, password} = req.body
+            const userData = await userService.registration(email, password)
+            return res.json(userData)
         } catch (e) {
-
+            console.log(e)
         }
     }
     async login(req: Request, res: Response, next: NextFunction) {
         try {
+            const {email, password} = req.body()
+            const userData = await userService.login(email, password)
 
         } catch (e) {
 
