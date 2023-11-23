@@ -8,11 +8,11 @@ const ApiError = require('../utils/api-error')
 
 class ItemsAllergyaService {
     async getAll() {
-        const data = await prisma.list.findMany({});
+        const data = await prisma.itemAllergy.findMany({});
         return data || []
     }
     async getById(id: number) {
-        return prisma.list.findUnique({
+        return prisma.itemAllergy.findUnique({
             where: { id },
         });
     }

@@ -1,14 +1,14 @@
 import { FastifyInstance } from 'fastify';
-const { ListResponse, ErrorResponse } = require('../config/models')
+const { ItemsAllergyResponse, ErrorResponse } = require('../config/models')
 const itemsAllergyaController = require('../controllers/itemsAllergya-controller')
 
 const getAll = {
     schema: {
-        tags: ['lists'],
+        tags: ['itemAllergy'],
         response: {
             200: {
                 type: "array",
-                items: ListResponse
+                items: ItemsAllergyResponse
             },
             400: ErrorResponse,
         },
@@ -18,14 +18,14 @@ const getAll = {
 
 const create = {
     schema: {
-        tags: ['lists'],
+        tags: ['itemAllergy'],
         response: {
-            200: ListResponse,
+            200: ItemsAllergyResponse,
             400: ErrorResponse,
         },
         body: {
-            title: {type: "string"},
-            userId: {type: "number"}
+            allergyId: { type: 'number' },
+            itemId: { type: 'number' },
         }
     },
     handler: itemsAllergyaController.create,
@@ -33,9 +33,9 @@ const create = {
 
 const getId = {
     schema: {
-        tags: ['lists'],
+        tags: ['itemAllergy'],
         response: {
-            200: ListResponse,
+            200: ItemsAllergyResponse,
             400: ErrorResponse,
         },
         params: {
@@ -48,17 +48,17 @@ const getId = {
 
 const update = {
     schema: {
-        tags: ['lists'],
+        tags: ['itemAllergy'],
         response: {
-            200: ListResponse,
+            200: ItemsAllergyResponse,
             400: ErrorResponse,
         },
         params: {
             id: {type: "number"}
         },
         body: {
-            title: {type: "string"},
-            userId: {type: "number"}
+            allergyId: { type: 'number' },
+            itemId: { type: 'number' },
         }
 
     },
@@ -67,7 +67,7 @@ const update = {
 
 const deleteId = {
     schema: {
-        tags: ['lists'],
+        tags: ['itemAllergy'],
         response: {
             200: {id: {type: "number"}},
             400: ErrorResponse,

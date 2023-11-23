@@ -34,7 +34,7 @@ const ListResponse = {
     },
 };
 
-const ItemsAllergyaResponse = {
+const ItemsAllergyResponse = {
     type: 'object',
     properties: {
         id: { type: 'number' },
@@ -67,4 +67,4 @@ const ErrorResponse = {
     }
 }
 
-module.exports = { CategoryResponse,ItemResponse,ItemsAllergyaResponse, TypeItemResponse,UnitResponse,ListResponse, ErrorResponse }
+module.exports = { CategoryResponse,ItemResponse,ItemsAllergyResponse, TypeItemResponse,UnitResponse,ListResponse, ErrorResponse }
