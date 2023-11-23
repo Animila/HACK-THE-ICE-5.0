@@ -1,11 +1,10 @@
-import * as repl from "repl";
 
 const apiError = require('../utils/api-error')
-const listService = require('../services/lists-service')
-class ListsController {
+const unitService = require('../services/units-service')
+class UnitsController {
     async getAll(req: any, reply: any) {
         try {
-            const data = await listService.getAll()
+            const data = await unitService.getAll()
             console.log(data)
             reply.send(data)
         } catch (e) {
@@ -17,7 +16,7 @@ class ListsController {
     async getId(req: any, reply: any) {
         try {
             const {id} = req.params
-            const result = await listService.getById(id)
+            const result = await unitService.getById(id)
             reply.send(result)
         } catch (e) {
             console.error(e);
@@ -25,20 +24,13 @@ class ListsController {
         }
     }
     async create(req: any, reply: any) {
-        const {title, userId} = req.body
+        const {title} = req.body
 
         try {
             if(!title) {
                 return apiError.BadRequest('Отсутствуют данные', 'title');
             }
-            if(!userId) {
-                return apiError.BadRequest('Отсутствуют данные', 'userId');
-            }
-
-            if(!parseInt(userId)) {
-                return apiError.BadRequest('Несоответствующий тип данных (int)', 'userId');
-            }
-            const result = await listService.create(title, userId)
+            const result = await unitService.create(title)
             return result
         } catch (e) {
             console.error(e);
@@ -47,9 +39,9 @@ class ListsController {
     }
     async update(req: any, reply: any) {
         try {
-            const {title, userId} = req.body
+            const {title} = req.body
             const { id } = req.params
-            const result = await listService.update(id, {title, userId})
+            const result = await unitService.update(id, {title})
             reply.send(result)
         } catch (e) {
             console.error(e);
@@ -59,7 +51,7 @@ class ListsController {
     async delete(req: any, reply: any) {
         try {
             const {id} = req.params
-            const result = await listService.delete(id)
+            const result = await unitService.delete(id)
             return result;
 
         } catch (e) {
@@ -70,4 +62,4 @@ class ListsController {
 
 }
 
-module.exports = new ListsController();
+module.exports = new UnitsController();

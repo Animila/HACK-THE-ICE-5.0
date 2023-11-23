@@ -34,6 +34,21 @@ const ListResponse = {
     },
 };
 
+const ItemResponse = {
+    type: 'object',
+    properties: {
+        id: { type: 'number' },
+        title: {type: 'string'},
+        typeItemId: { type: 'number' },
+        unitId: { type: 'number' },
+        count: { type: 'number' },
+        start_date: { type: 'string' },
+        end_date: { type: 'string' },
+        listId: { type: 'number' },
+    },
+};
+
+
 const ErrorResponse = {
     type: 'object',
     properties: {
@@ -43,4 +58,4 @@ const ErrorResponse = {
     }
 }
 
-module.exports = { CategoryResponse, TypeItemResponse,UnitResponse,ListResponse, ErrorResponse }
+module.exports = { CategoryResponse,ItemResponse, TypeItemResponse,UnitResponse,ListResponse, ErrorResponse }

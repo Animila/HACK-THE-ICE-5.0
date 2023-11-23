@@ -44,6 +44,7 @@ model Item {
   end_date      DateTime
   list          List          @relation(fields: [listId], references: [id])
   listId        Int
+  title         String
   itemAllergy   ItemAllergy[]
   changeItem    ChangeItem[]
 }
