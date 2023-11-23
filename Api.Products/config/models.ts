@@ -57,6 +57,17 @@ const ItemResponse = {
     },
 };
 
+const ChangeItemResponse = {
+    type: 'object',
+    properties: {
+        id: { type: 'number' },
+        itemId: {type: 'number'},
+        count: {type: 'number'},
+        date: { type: 'string' },
+        type: {type: 'string'}
+    },
+};
+
 
 const ErrorResponse = {
     type: 'object',
@@ -67,4 +78,4 @@ const ErrorResponse = {
     }
 }
 
-module.exports = { CategoryResponse,ItemResponse,ItemsAllergyResponse, TypeItemResponse,UnitResponse,ListResponse, ErrorResponse }
+module.exports = { CategoryResponse,ChangeItemResponse,ItemResponse,ItemsAllergyResponse, TypeItemResponse,UnitResponse,ListResponse, ErrorResponse }

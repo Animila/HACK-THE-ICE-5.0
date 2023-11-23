@@ -50,10 +50,11 @@ model Item {
 }
 
 model ChangeItem {
-  id     Int      @id @default(autoincrement())
-  item   Item     @relation(fields: [itemId], references: [id])
+  id     Int            @id @default(autoincrement())
+  item   Item           @relation(fields: [itemId], references: [id])
   itemId Int
   count  Int
+  type   ChangeItemType
   date   DateTime
 }
 
@@ -62,6 +63,12 @@ model List {
   title  String
   item   Item[]
   userId Int
+}
+
+enum ChangeItemType {
+  ADD
+  MODIFY
+  REMOVE
 }
 
 model ItemAllergy {
