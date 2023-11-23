@@ -34,6 +34,15 @@ const ListResponse = {
     },
 };
 
+const ItemsAllergyaResponse = {
+    type: 'object',
+    properties: {
+        id: { type: 'number' },
+        allergyId: { type: 'number' },
+        itemId: { type: 'number' },
+    },
+};
+
 const ItemResponse = {
     type: 'object',
     properties: {
@@ -58,4 +67,4 @@ const ErrorResponse = {
     }
 }
 
-module.exports = { CategoryResponse,ItemResponse, TypeItemResponse,UnitResponse,ListResponse, ErrorResponse }
+module.exports = { CategoryResponse,ItemResponse,ItemsAllergyaResponse, TypeItemResponse,UnitResponse,ListResponse, ErrorResponse }

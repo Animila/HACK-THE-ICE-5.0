@@ -35,6 +35,7 @@ fastify.register(require('./routers/typeItem'), { prefix: '/products/api/typeIte
 fastify.register(require('./routers/lists'), { prefix: '/products/api/lists' });
 fastify.register(require('./routers/items'), { prefix: '/products/api/items' });
 fastify.register(require('./routers/units'), { prefix: '/products/api/units' });
+fastify.register(require('./routers/itemsAllergya'), { prefix: '/products/api/allergy' });
 
 
 const start = async () => {
