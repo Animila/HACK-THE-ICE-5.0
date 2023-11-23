@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
 const { TypeItemResponse, ErrorResponse } = require('../config/models')
-const categoriesController = require('../controllers/categories-controller')
+const typeitemController = require('../controllers/typeItem-controller')
 
 const getAll = {
     schema: {
@@ -13,7 +13,7 @@ const getAll = {
             400: ErrorResponse,
         },
     },
-    handler: categoriesController.getAll,
+    handler: typeitemController.getAll,
 }
 
 const create = {
@@ -25,11 +25,12 @@ const create = {
         },
         body: {
             title: { type: 'string' },
-            default_day: {type: 'string'},
+            default_day: {type: 'number'},
+            categoryId: {type: 'number'},
             path_logo: { type: 'string' },
         }
     },
-    handler: categoriesController.create,
+    handler: typeitemController.create,
 }
 
 const getId = {
@@ -44,7 +45,7 @@ const getId = {
         },
 
     },
-    handler: categoriesController.getId,
+    handler: typeitemController.getId,
 }
 
 const update = {
@@ -59,12 +60,13 @@ const update = {
         },
         body: {
             title: { type: 'string' },
-            default_day: {type: 'string'},
+            default_day: {type: 'number'},
+            categoryId: {type: 'number'},
             path_logo: { type: 'string' },
         }
 
     },
-    handler: categoriesController.update,
+    handler: typeitemController.update,
 }
 
 const deleteId = {
@@ -79,7 +81,7 @@ const deleteId = {
         },
 
     },
-    handler: categoriesController.delete,
+    handler: typeitemController.delete,
 }
 
 

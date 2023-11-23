@@ -28,7 +28,7 @@ model SubCategory {
   title       String
   category    Category @relation(fields: [categoryId], references: [id])
   categoryId  Int
-  default_day DateTime
+  default_day Float
   path_logo   String
   item        Item[]
 }

@@ -17,7 +17,7 @@ class TypeItemService {
         });
     }
 
-    async create(title: string, path_logo: string, default_day: string) {
+    async create(title: string, path_logo: string, default_day: Date, categoryId: number) {
 
         const old = await prisma.subCategory.findFirst({where: {title: title}})
         if(old) {
@@ -29,11 +29,12 @@ class TypeItemService {
                 title,
                 default_day,
                 path_logo,
+                categoryId
             },
         });
     }
 
-    async update(id: number, newData: {title: string, path_logo: string, default_day: string}) {
+    async update(id: number, newData: {title: string, path_logo: string, default_day: Date}) {
         const old = await prisma.subCategory.findFirst({where: {id}})
         if(!old) {
             throw ApiError.NotFound()

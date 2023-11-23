@@ -12,7 +12,7 @@ const TypeItemResponse = {
     properties: {
         id: { type: 'number' },
         title: { type: 'string' },
-        default_day: {type: 'string'},
+        default_day: {type: 'number'},
         path_logo: { type: 'string' },
     },
 };
