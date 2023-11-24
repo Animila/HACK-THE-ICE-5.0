@@ -18,20 +18,20 @@ jobs:
         with:
           host: 84.54.47.28
           username: root
-          key: 4yBx832jXwwQD3th
+          key: Kirit
 
       - name: Copy code to server
         run: |
-          scp -r ./* root@84.54.47.28:/path/to/your/app
+          scp -r ./* root@84.54.47.28:/HACK-THE-ICE-5.0
 
       - name: SSH Command
         uses: appleboy/ssh-action@master
         with:
           host: 84.54.47.28
           username: root
-          key: 4yBx832jXwwQD3th
+          key: Kirit
           port: 22
           script: |
-            cd /path/to/your/app
+            cd /HACK-THE-ICE-5.0
             docker-compose down
             docker-compose up -d
